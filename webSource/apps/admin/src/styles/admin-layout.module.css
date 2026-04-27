@@ -1,0 +1,27 @@
+/* ===== 侧边栏 Logo 区域 ===== */
+.sidebarLogo {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 12px;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 100%
+  );
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.sidebarLogo img {
+  max-height: 32px;
+  max-width: 120px;
+  object-fit: contain;
+}
+.sidebarLogo span {
+  color: #fff;
+  font-weight: 600;
+  font-size: 17px;
+  white-space: nowrap;
+}

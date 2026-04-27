@@ -1,0 +1,25 @@
+/* ===== 统计卡片容器（Arco 子组件覆盖） ===== */
+.statCard :global(.arco-card) {
+  border: none !important;
+}
+.statCard :global(.arco-card:hover) {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.statCard :global(.arco-statistic-title) {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.statCard :global(.arco-statistic-content .arco-statistic-value) {
+  color: #fff !important;
+}
+
+/* ===== 统计图标容器（半透明背景） ===== */
+.statIconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}

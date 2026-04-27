@@ -1,0 +1,13 @@
+/* ===== 分类树容器（Arco 悬停覆盖） ===== */
+.treeContainer :global(.arco-tree-node:hover) .nodeActions {
+  opacity: 1;
+}
+
+/* ===== 节点操作按钮（opacity 过渡） ===== */
+.nodeActions {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  display: inline-flex;
+  gap: 2px;
+  margin-left: 8px;
+}

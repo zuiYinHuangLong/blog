@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+*.log
+.env
+.env.local
+
+# Go
+server/blog-server
+server/uploads/*
+!server/uploads/.gitkeep
+server/tmp/
+
+# Build output (deploy this folder)
+web/

@@ -1,0 +1,30 @@
+/* ===== Admin 全局主题变量 ===== */
+:root {
+  --admin-primary: #165dff;
+  --admin-primary-light: #e8f3ff;
+  --admin-gradient-blue: linear-gradient(135deg, #165dff 0%, #4080ff 100%);
+  --admin-gradient-green: linear-gradient(135deg, #00b42a 0%, #23c343 100%);
+  --admin-gradient-orange: linear-gradient(135deg, #ff7d00 0%, #ff9a2e 100%);
+  --admin-gradient-purple: linear-gradient(135deg, #722ed1 0%, #9254de 100%);
+  --admin-gradient-login: linear-gradient(135deg, #165dff 0%, #722ed1 100%);
+  --admin-shadow-card: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --admin-shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --admin-shadow-header: 0 1px 4px rgba(0, 0, 0, 0.04);
+  --admin-radius: 8px;
+  --admin-transition: 0.3s ease;
+}
+
+/* ===== Arco 组件全局覆盖（需命中第三方类名） ===== */
+.arco-card {
+  border-radius: var(--admin-radius) !important;
+  box-shadow: var(--admin-shadow-card);
+  transition: box-shadow var(--admin-transition);
+  border: none !important;
+}
+.arco-card:hover {
+  box-shadow: var(--admin-shadow-card-hover);
+}
+
+.arco-table-th {
+  background: var(--admin-primary-light) !important;
+}

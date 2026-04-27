@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  mode: debug
+
+database:
+  host: 127.0.0.1
+  port: 3306
+  user: root
+  password: ''
+  name: blog
+  charset: utf8mb4
+
+jwt:
+  secret: blog-jwt-secret-key-change-in-production
+  expire: 7200 # access token 2 hours (seconds)
+  refresh_expire: 604800 # refresh token 7 days
+
+upload:
+  path: ./uploads
+  max_size: 10485760 # 10MB
+  allowed_types:
+    - image/jpeg
+    - image/png
+    - image/gif
+    - image/webp
+
+blog:
+  base_url: http://localhost:5174

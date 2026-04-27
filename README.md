@@ -192,3 +192,23 @@ pnpm build
 ## 国际化
 
 后台管理支持中英文切换（zh-CN / en-US），使用 `react-intl` 风格定义语言包，存放在 `apps/admin/src/locales/`。
+
+## CI/CD 与部署
+
+### 自动化部署架构
+
+- **后端**：GitHub Actions 自动构建和部署（仅 `server/` 目录变更时触发）
+- **前端**：本地构建后通过脚本直接上传
+- **域名**：zqytg.online
+
+### 快速部署
+
+```bash
+# 后端：推送到 main 分支自动部署
+git push origin main
+
+# 前端：运行部署脚本
+./deploy-frontend.sh
+```
+
+详细部署步骤请查看 [DEPLOY.md](DEPLOY.md)。

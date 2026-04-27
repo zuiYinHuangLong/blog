@@ -11,4 +11,4 @@ server/uploads/*
 server/tmp/
 
 # Build output (deploy this folder)
-web/
+web/server/

@@ -1,0 +1,17 @@
+[Unit]
+Description=Blog Backend Server
+After=network.target mysql.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/var/www/blog/server
+ExecStart=/var/www/blog/server/blog-server
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+Environment=GIN_MODE=release
+
+[Install]
+WantedBy=multi-user.target

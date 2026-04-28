@@ -12,8 +12,8 @@
 ### 1. 上传并执行初始化脚本
 
 ```bash
-scp setup-server.sh root@zqytg.online:/tmp/
-ssh root@zqytg.online "sudo bash /tmp/setup-server.sh"
+scp setup-server.sh ubuntu@zqytg.online:/tmp/
+ssh ubuntu@zqytg.online "sudo bash /tmp/setup-server.sh"
 ```
 
 ### 2. 配置 Nginx
@@ -22,17 +22,8 @@ ssh root@zqytg.online "sudo bash /tmp/setup-server.sh"
 
 ```bash
 # 上传 nginx 配置
-scp nginx.conf root@zqytg.online:/etc/nginx/sites-available/blog
-
-# 启用站点
-cd /etc/nginx/sites-enabled
-ln -s ../sites-available/blog blog
-
-# 测试配置
-nginx -t
-
-# 重启 Nginx
-systemctl reload nginx
+scp nginx.conf ubuntu@zqytg.online:/tmp/blog-nginx.conf
+ssh ubuntu@zqytg.online "sudo cp /tmp/blog-nginx.conf /etc/nginx/sites-available/blog && sudo ln -sf /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/blog && sudo nginx -t && sudo systemctl reload nginx"
 ```
 
 ### 3. 配置 Systemd 服务
@@ -41,17 +32,8 @@ systemctl reload nginx
 
 ```bash
 # 上传服务文件
-scp blog-server.service root@zqytg.online:/etc/systemd/system/
-
-# 重新加载 systemd
-systemctl daemon-reload
-
-# 启用并启动服务
-systemctl enable blog-server
-systemctl start blog-server
-
-# 查看状态
-systemctl status blog-server
+scp blog-server.service ubuntu@zqytg.online:/tmp/blog-server.service
+ssh ubuntu@zqytg.online "sudo cp /tmp/blog-server.service /etc/systemd/system/ && sudo systemctl daemon-reload && sudo systemctl enable blog-server && sudo systemctl start blog-server"
 ```
 
 ## 二、配置 GitHub Secrets
@@ -61,7 +43,7 @@ systemctl status blog-server
 | 密钥名称          | 值                                       | 说明             |
 | ----------------- | ---------------------------------------- | ---------------- |
 | `SERVER_HOST`     | `zqytg.online`                           | 服务器地址       |
-| `SERVER_USER`     | `root`                                   | SSH 用户名       |
+| `SERVER_USER`     | `ubuntu`                                 | SSH 用户名       |
 | `SERVER_PORT`     | `22`                                     | SSH 端口（可选） |
 | `SSH_PRIVATE_KEY` | `-----BEGIN OPENSSH PRIVATE KEY-----...` | SSH 私钥         |
 | `DEPLOY_PATH`     | `/var/www/blog`                          | 部署路径         |
@@ -73,7 +55,7 @@ systemctl status blog-server
 ssh-keygen -t ed25519 -C "github-actions" -f ~/.ssh/github_actions
 
 # 将公钥添加到服务器
-ssh-copy-id -i ~/.ssh/github_actions.pub root@zqytg.online
+ssh-copy-id -i ~/.ssh/github_actions.pub ubuntu@zqytg.online
 
 # 查看私钥（复制到 GitHub Secrets）
 cat ~/.ssh/github_actions
@@ -150,8 +132,8 @@ pnpm build:blog
 cd ..
 
 # 2. 上传到服务器
-scp -r web/admin/* root@zqytg.online:/var/www/blog/web/admin/
-scp -r web/blog/* root@zqytg.online:/var/www/blog/web/blog/
+scp -r web/admin/* ubuntu@zqytg.online:/var/www/blog/web/admin/
+scp -r web/blog/* ubuntu@zqytg.online:/var/www/blog/web/blog/
 ```
 
 ## 五、配置前端 API 地址
@@ -170,13 +152,13 @@ export const API_BASE_URL = 'https://zqytg.online/api/v1'
 
 ```bash
 # 在服务器上安装 Certbot
-apt install -y certbot python3-certbot-nginx
+sudo apt install -y certbot python3-certbot-nginx
 
 # 获取并配置证书
-certbot --nginx -d zqytg.online -d www.zqytg.online
+sudo certbot --nginx -d zqytg.online -d www.zqytg.online
 
 # 自动续期
-certbot renew --dry-run
+sudo certbot renew --dry-run
 ```
 
 ## 七、验证部署

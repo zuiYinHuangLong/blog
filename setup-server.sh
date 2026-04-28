@@ -9,23 +9,23 @@ echo "🚀 开始初始化服务器环境..."
 
 # 1. 更新系统
 echo "📦 更新系统包..."
-apt update && apt upgrade -y
+sudo apt update && sudo apt upgrade -y
 
 # 2. 安装 Nginx
 echo "🌐 安装 Nginx..."
-apt install -y nginx
-systemctl enable nginx
-systemctl start nginx
+sudo apt install -y nginx
+sudo systemctl enable nginx
+sudo systemctl start nginx
 
 # 3. 安装 MySQL
 echo "🗄️ 安装 MySQL..."
-apt install -y mysql-server
-systemctl enable mysql
-systemctl start mysql
+sudo apt install -y mysql-server
+sudo systemctl enable mysql
+sudo systemctl start mysql
 
 # 4. 配置 MySQL 安全设置（可选）
 echo "🔒 配置 MySQL 安全..."
-mysql_secure_installation <<EOF
+sudo mysql_secure_installation <<EOF
 
 y
 y
@@ -35,10 +35,10 @@ EOF
 
 # 5. 创建博客数据库
 echo "📊 创建数据库..."
-mysql -u root -e "CREATE DATABASE IF NOT EXISTS blog CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-mysql -u root -e "CREATE USER IF NOT EXISTS 'blog'@'localhost' IDENTIFIED BY 'your_secure_password';"
-mysql -u root -e "GRANT ALL PRIVILEGES ON blog.* TO 'blog'@'localhost';"
-mysql -u root -e "FLUSH PRIVILEGES;"
+sudo mysql -u root -e "CREATE DATABASE IF NOT EXISTS blog CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+sudo mysql -u root -e "CREATE USER IF NOT EXISTS 'blog'@'localhost' IDENTIFIED BY 'your_secure_password';"
+sudo mysql -u root -e "GRANT ALL PRIVILEGES ON blog.* TO 'blog'@'localhost';"
+sudo mysql -u root -e "FLUSH PRIVILEGES;"
 
 echo "⚠️ 请修改 server/config/config.yaml 中的数据库密码！"
 
@@ -51,15 +51,15 @@ mkdir -p /var/www/blog/uploads
 
 # 7. 设置目录权限
 echo "🔐 设置目录权限..."
-chown -R www-data:www-data /var/www/blog
+sudo chown -R ubuntu:ubuntu /var/www/blog
 chmod -R 755 /var/www/blog
 
 # 8. 配置防火墙（如果使用 UFW）
 echo "🛡️ 配置防火墙..."
-ufw allow 80/tcp
-ufw allow 443/tcp
-ufw allow 22/tcp
-ufw --force enable
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 22/tcp
+sudo ufw --force enable
 
 echo ""
 echo "✅ 服务器环境初始化完成！"
@@ -67,8 +67,8 @@ echo ""
 echo "📋 后续步骤："
 echo "1. 修改 server/config/config.yaml 中的数据库配置"
 echo "2. 将 nginx.conf 复制到 /etc/nginx/sites-available/blog"
-echo "3. 启用 Nginx 站点: ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/"
-echo "4. 重启 Nginx: systemctl reload nginx"
+echo "3. 启用 Nginx 站点: sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/"
+echo "4. 重启 Nginx: sudo systemctl reload nginx"
 echo "5. 上传 blog-server 到 /var/www/blog/server/"
 echo "6. 使用 blog-server.service 配置 systemd 服务"
 echo "7. 启动后端服务: systemctl start blog-server"

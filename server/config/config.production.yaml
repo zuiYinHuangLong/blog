@@ -6,7 +6,7 @@ database:
   host: 127.0.0.1
   port: 3306
   user: blog
-  password: 'your_secure_password_here' # 修改为实际密码
+  password: 'zhttty01'
   name: blog
   charset: utf8mb4
 

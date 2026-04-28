@@ -4,7 +4,7 @@ After=network.target mysql.service
 
 [Service]
 Type=simple
-User=root
+User=ubuntu
 WorkingDirectory=/var/www/blog/server
 ExecStart=/var/www/blog/server/blog-server
 Restart=always

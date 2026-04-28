@@ -18,7 +18,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 # 配置
-SERVER_USER="root"
+SERVER_USER="ubuntu"
 SERVER_HOST="zqytg.online"
 DEPLOY_PATH="/var/www/blog"
 

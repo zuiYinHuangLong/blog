@@ -6,7 +6,7 @@
 set -e
 
 # 配置变量
-SERVER_USER="root"
+SERVER_USER="ubuntu"
 SERVER_HOST="zqytg.online"
 SERVER_PORT="22"
 DEPLOY_PATH="/var/www/blog"
